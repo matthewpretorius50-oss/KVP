@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuromi Valentine Surprise 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    /* General Body */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Press Start 2P', cursive;
+      background: linear-gradient(135deg, #ffb6c1, #8a2be2);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 5vw; /* responsive font size */
+      margin-bottom: 4vw;
+      text-shadow: 2px 2px #000;
+    }
+
+    p {
+      font-size: 3vw;
+      margin-bottom: 6vw;
+    }
+
+    button {
+      background-color: #000;
+      color: #ff69b4;
+      border: 2px solid #ff69b4;
+      border-radius: 12px;
+      padding: 3vw 6vw;
+      font-size: 4vw;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ff69b4;
+      color: #000;
+    }
+
+    /* Hearts */
+    .heart {
+      position: absolute;
+      width: 4vw;
+      height: 4vw;
+      background-color: #ff69b4;
+      transform: rotate(45deg);
+      animation: float 6s linear infinite;
+      opacity: 0.8;
+    }
+
+    .heart:before,
+    .heart:after {
+      content: "";
+      position: absolute;
+      width: 4vw;
+      height: 4vw;
+      background-color: #ff69b4;
+      border-radius: 50%;
+    }
+
+    .heart:before { top: -2vw; left: 0; }
+    .heart:after { left: 2vw; top: 0; }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+      100% { transform: translateY(-120vh) rotate(45deg); opacity: 0; }
+    }
+
+    /* Kuromi plushies */
+    .kuromi {
+      position: absolute;
+      width: 15vw;
+      animation: floatKuromi linear infinite;
+    }
+
+    @keyframes floatKuromi {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-20vh) rotate(360deg); opacity: 0.8; }
+    }
+
+    /* Popup */
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background-color: #000;
+      border: 3px solid #ff69b4;
+      border-radius: 5vw;
+      padding: 6vw;
+      width: 80vw;
+      color: #ff69b4;
+      text-align: center;
+      transition: transform 0.5s ease;
+      z-index: 10;
+    }
+
+    .popup.active {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popup img {
+      width: 30vw;
+      margin-bottom: 4vw;
+    }
+
+    .popup button {
+      margin-top: 4vw;
+      padding: 3vw 6vw;
+      font-size: 4vw;
+    }
+
+    /* Ensure floating elements stay on top */
+    .heart, .kuromi {
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💖 Happy Valentine’s Day! 💖</h1>
+  <p>Kuromi has a special message for you…</p>
+  <button onclick="showPopup()">See Surprise</button>
+
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <img src="https://i.pinimg.com/736x/ef/20/36/ef2036f1f44f75689d6d43dc0a54b4f0.jpg" alt="Kuromi">
+    <p>"You stole my heart… will you be my forever Valentine?"</p>
+    <button onclick="closePopup()">Yes 💜</button>
+  </div>
+
+  <script>
+    // Hearts
+    const heartsCount = 20; // less for mobile performance
+    for (let i = 0; i < heartsCount; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (4 + Math.random() * 4) + 's';
+      heart.style.width = heart.style.height = (3 + Math.random() * 4) + 'vw';
+      document.body.appendChild(heart);
+    }
+
+    // Kuromi plushies
+    const kuromiImages = [
+      "Kuromi_render.png",
+      "Kuromi.webp",
+      "sanrio-kuromi-cute-512x512.png"
+    ];
+
+    for (let i = 0; i < 6; i++) {
+      const kuromi = document.createElement('img');
+      kuromi.src = kuromiImages[Math.floor(Math.random() * kuromiImages.length)];
+      kuromi.classList.add('kuromi');
+      kuromi.style.left = Math.random() * 90 + 'vw';
+      kuromi.style.animationDuration = (6 + Math.random() * 6) + 's';
+      kuromi.style.width = 10 + Math.random() * 10 + 'vw';
+      document.body.appendChild(kuromi);
+    }
+
+    function showPopup() {
+      document.getElementById('popup').classList.add('active');
+    }
+
+    function closePopup() {
+      document.getElementById('popup').classList.remove('active');
+      alert("💖 Yay! She said yes! 💖");
+    }
+  </script>
+
+</body>
+</html>
